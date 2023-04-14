@@ -516,7 +516,7 @@ int main()
                         posicionar_mensagem(10, 43, "Jogo desenvolvido pelos alunos: ", NULL);
                         posicionar_mensagem(11, 43, "Eric Kennedy", NULL);
                         posicionar_mensagem(12, 43, "Mateus Brocatto", NULL);
-                        posicionar_mensagem(13, 43, "Pedro", NULL);
+                        posicionar_mensagem(13, 43, "Pedro Otavio", NULL);
                         posicionar_mensagem(15, 43, "Prof. Orientador: ", NULL);
                         posicionar_mensagem(16, 43, "Alexandre Donizetti", NULL);
                         getch();
