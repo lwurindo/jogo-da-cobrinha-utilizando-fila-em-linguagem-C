@@ -303,7 +303,6 @@ int analiza()
             num_colisoes++;
             if (num_colisoes == 3)
             {
-                // O jogador perdeu o jogo
                 return 1;
             }
             // Remove a cabeça da cobra
@@ -324,10 +323,10 @@ void geraComida()
     srand(time(NULL));
     do
     {
-        comida[0] = (rand() % 41) + 30; // coordenada x dentro do retângulo
+comida[0] = (rand() % 49) + 31; // coordenada x dentro do retângulo
         comida[1] = (rand() % 17) + 4; // coordenada y dentro do retângulo
     }
-    while (comida[0] <= 30 || comida[0] >= 70 || comida[1] <= 4 || comida[1] >= 20);   // verifica se está dentro do retângulo
+    while (comida[0] <= 20 || comida[0] >= 70 || comida[1] <= 4 || comida[1] >= 20);   // verifica se está dentro do retângulo
     gotoxy(comida[0], comida[1]);
     printf("%c", 4);
 }
@@ -380,26 +379,7 @@ int main()
     int gameover=0;
     int tecla;
 
-
-    char lista[3][40]= {"Snake Game", "Game", "Sair"};
-    char listaCobra[4][40]= {"Comecar o jogo", "Como Jogar", "Retornar ao Menu Principal", "Sair"};
-
-    do
-    {
-        menuPrincipal:
-        textColor(WHITE, _BLACK);
-        system("cls");
-        textColor(WHITE, _BLACK);
-        printf("\n\n\n\n");
-        opc = menu(10,10,3,lista);
-
-        linhaCol(1,1);
-        textColor(WHITE, _BLACK);
-
-
-        switch (opc)
-        {
-        case 1:
+    char listaCobra[4][40]= {"Comecar o jogo", "Como Jogar", "Creditos", "Sair"};
 
             do
             {
@@ -449,8 +429,6 @@ int main()
                         gotoxy(88,2); // Move o cursor para c: 52, l: 2
                         printf("Tamanho da fila: %d\t",pontos);
                         gotoxy(88,4);
-                        printf("Velocidade: %.2f caracteres/s",1000/velo);
-                        gotoxy(88, 6);
                         printf("Vidas: %d", (3-num_colisoes));
 
 
@@ -497,7 +475,14 @@ int main()
                     }
                     textColor(WHITE, _BLACK);
                     system("cls"); // Quando o usuário perder, limpa a tela e exibe uma mensagem final
-                    printf("Voce perdeu! Sua fila chegou no tamanho de %d.\n",pontos);
+                    printf("\n\n\n\n\t\t\tVoce perdeu! Sua fila chegou no tamanho de %d.\n",pontos);
+                    posicionar_mensagem(6, 25, "             ____", NULL);
+                    posicionar_mensagem(7, 25, "            / . .\\", NULL);
+                    posicionar_mensagem(8, 25, "            \  ---<", NULL);
+                    posicionar_mensagem(9, 25, "             \  /", NULL);
+                    posicionar_mensagem(10, 25, "  __________/ /", NULL);
+                    posicionar_mensagem(11, 25, "-=___________/", NULL);
+
                     pontos = 0;
                     for(i = 0; i < tamanhoFila; i++)
                     {
@@ -505,6 +490,7 @@ int main()
                         tamanhoFila--;
                         pontos = pontos - pontos + 1;
                         num_colisoes = 0;
+                        velo = 150;
 
                     }
 
@@ -515,43 +501,36 @@ int main()
                     textColor(WHITE, _BLACK);
                     system("cls");
                     posicionar_mensagem(10, 50, "Como jogar: ", NULL);
-                    posicionar_mensagem(12, 22, "Seu objetivo é controlar uma cobra que se move pela tela em busca de comida.", NULL);
-                    posicionar_mensagem(14, 18, "A cada vez que a cobra come, ela cresce um pouco mais e a velocidade do jogo também aumenta.", NULL);
-                    posicionar_mensagem(16, 22, "Para jogar, você deve usar as setas: W - Cima, D - Direita, S - Baixo, A - Esquerda.", NULL);
-                    posicionar_mensagem(18, 34, "Você possui 3 vidas. A colisão com a parede é GAMEOVER!", NULL);
-                    posicionar_mensagem(20, 28, "Porém a colisão com seu próprio corpo remove 1 de vida e 1 de tamanho.", NULL);
-                    posicionar_mensagem(22, 28, "A sua pontuação é baseada no número de alimentos coletados, BOA SORTE!", NULL);
+                    posicionar_mensagem(12, 22, "Seu objetivo eh controlar uma cobra que se move pela tela em busca de comida.", NULL);
+                    posicionar_mensagem(14, 18, "A cada vez que a cobra come, ela cresce um pouco mais e a velocidade do jogo tambem aumenta.", NULL);
+                    posicionar_mensagem(16, 22, "Para jogar, voce deve usar as setas: W - Cima, D - Direita, S - Baixo, A - Esquerda.", NULL);
+                    posicionar_mensagem(18, 34, "Voce possui 3 vidas. A colisao com a parede eh GAMEOVER!", NULL);
+                    posicionar_mensagem(20, 28, "Porem a colisao com seu proprio corpo remove 1 de vida e 1 de tamanho.", NULL);
+                    posicionar_mensagem(22, 28, "A sua pontuacao eh baseada no numero de alimentos coletados, BOA SORTE!", NULL);
 
                     getch();
                     break;
                 case 3:
-                    goto menuPrincipal;
-                    break;
+                        textColor(WHITE, _BLACK);
+                        system("cls");
+                        posicionar_mensagem(10, 43, "Jogo desenvolvido pelos alunos: ", NULL);
+                        posicionar_mensagem(11, 43, "Eric Kennedy", NULL);
+                        posicionar_mensagem(12, 43, "Mateus Brocatto", NULL);
+                        posicionar_mensagem(13, 43, "Pedro", NULL);
+                        posicionar_mensagem(15, 43, "Prof. Orientador: ", NULL);
+                        posicionar_mensagem(16, 43, "Alexandre Donizetti", NULL);
+                        getch();
+                        break;
+
                 case 4:
                     textColor(WHITE, _BLACK);
                     system("cls");
                     posicionar_mensagem(15, 50, "Encerrando...", NULL);
                     Sleep(1000);
                     return 0;
+                    break;
                 }
             }while(opcSnake !=4);
 
-        case 2:
-            system("cls");
-            printf("TESTEEE");
-            getch();
-            system("cls");
-
-            break;
-
-        case 3:
-            system("cls");
-            posicionar_mensagem(15, 50, "Encerrando...", NULL);
-            Sleep(1000);
-            return 0;
-        }
-
-    }
-    while(opc != 3);
-
 }
+
